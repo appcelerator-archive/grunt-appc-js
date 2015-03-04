@@ -17,10 +17,10 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-appc-js');
 ```
 
-## The "appc_js" task
+## The "appcJs" task
 
 ### Overview
-In your project's Gruntfile, add a section named `appc_js` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `appcJs` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
