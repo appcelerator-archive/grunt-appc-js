@@ -1,7 +1,7 @@
 {
   "name": "grunt-appc-js",
   "description": "Linting and style checks for Appcelerator JavaScript",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/ingo/grunt-appc-js",
   "author": {
     "name": "Ingo Muschenetz",
@@ -21,7 +21,7 @@
     }
   ],
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "scripts": {
     "test": "grunt test"
