@@ -41,3 +41,4 @@ version | details
 --------|--------
 v0.1.0  | initial release
 v0.2.0  | packaging update
+v0.3.0  | more packaging updates
