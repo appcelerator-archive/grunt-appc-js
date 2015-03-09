@@ -19,5 +19,20 @@
   "node": true,
   "-W104": true,
   "-W068": true,
-  "globals": {}
+  "globals": {
+    /* MOCHA */
+    "after"      : false,
+    "afterEach"  : false,
+    "before"     : false,
+    "beforeEach" : false,
+    "describe"   : false,
+    "it"         : false,
+
+    /* MOCHA */
+    "should"     : false,
+
+    /* Titanium */
+    "Titanium"   : false,
+    "Ti"         : false
+  }
 }
