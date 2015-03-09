@@ -48,6 +48,7 @@ module.exports = function (grunt) {
 			options: {
 				files: ['package.json'],
 				commitFiles: ['package.json'],
+				pushTo: 'origin'
 			}
 		}	
 
