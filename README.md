@@ -35,7 +35,5 @@ grunt.initConfig({
 });
 ```
 
-### Options
-
 ## Contributing
 Add unit tests for any new or changed functionality. Run npm test to ensure your added code matches existing style standards.
