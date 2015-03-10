@@ -1,6 +1,10 @@
 # grunt-appc-js
 
 > Linting and style checks for Appcelerator JavaScript
+[![Build Status](https://travis-ci.org/ingo/grunt-appc-js.svg?branch=master)](https://travis-ci.org/ingo/grunt-appc-js)
+[![Dependency Status](https://david-dm.org/ingo/grunt-appc-js.svg)](https://david-dm.org/ingo/grunt-appc-js)
+[![devDependency Status](https://david-dm.org/ingo/grunt-appc-js/dev-status.svg)](https://david-dm.org/ingo/grunt-appc-js#info=devDependencies)
+[![NPM version](https://badge.fury.io/js/grunt-appc-js.svg)](http://badge.fury.io/js/grunt-appc-js)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
