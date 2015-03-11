@@ -7,6 +7,9 @@
     "name": "Ingo Muschenetz",
     "email": "ingo@muschenetz.com"
   },
+  "keywords": [
+    "appc-client"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/ingo/grunt-appc-js.git"
