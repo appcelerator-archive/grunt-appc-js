@@ -17,12 +17,12 @@ module.exports = function (grunt) {
 		// there is likely a better way to specify the path to the files
 		var optionsJscs = {
 			src: this.data,
-			options: {config: 'node_modules/grunt-appc-js/.jscsrc'}
+			options: this.options({config: 'node_modules/grunt-appc-js/.jscsrc'})
 		};
 
 		var optionsJsHint = {
 			src: this.data,
-			options: {jshintrc: 'node_modules/grunt-appc-js/.jshintrc'}
+			options: this.options({jshintrc: 'node_modules/grunt-appc-js/.jshintrc'})
 		};
 
 		// have to require the specific task, as there is no "main" in package.json

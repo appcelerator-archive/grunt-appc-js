@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 				commitFiles: ['package.json'],
 				pushTo: 'origin'
 			}
-		}	
+		}
 
 	});
 

@@ -30,10 +30,15 @@ In your project's Gruntfile, add a section named `appcJs` to the data object pas
 ```js
 grunt.initConfig({
   appcJs: {
+  	options: {
+  		force: false
+  	}
     src: ['paths', 'to', 'js', 'files'],
   }
 });
 ```
+
+* force (optional): If set to true, don't fail the task on errors
 
 ## Contributing
 Add unit tests for any new or changed functionality. Run npm test to ensure your added code matches existing style standards.
