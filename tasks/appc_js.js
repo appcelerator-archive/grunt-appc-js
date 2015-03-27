@@ -9,6 +9,8 @@
 'use strict';
 
 var extendGruntPlugin = require('extend-grunt-plugin');
+var packpath = require('packpath');
+var path = require('path');
 
 module.exports = function (grunt) {
 
@@ -17,12 +19,12 @@ module.exports = function (grunt) {
 		// there is likely a better way to specify the path to the files
 		var optionsJscs = {
 			src: this.data,
-			options: this.options({config: 'node_modules/grunt-appc-js/.jscsrc'})
+			options: this.options({config: 'node_modules/grunt-appc-js/.jscsrc', reporter: require('jscs-stylish').path })
 		};
 
 		var optionsJsHint = {
 			src: this.data,
-			options: this.options({jshintrc: 'node_modules/grunt-appc-js/.jshintrc'})
+			options: this.options({jshintrc: 'node_modules/grunt-appc-js/.jshintrc', reporter: path.join(packpath.self(), 'node_modules/jshint-stylish/stylish.js')})
 		};
 
 		// have to require the specific task, as there is no "main" in package.json

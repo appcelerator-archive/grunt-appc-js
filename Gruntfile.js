@@ -19,13 +19,14 @@ module.exports = function (grunt) {
 				'<%= nodeunit.tests %>'
 			],
 			options: {
-				jshintrc: '.jshintrc'
+				jshintrc: '.jshintrc',
+				reporter: 'node_modules/jshint-stylish/stylish.js'
 			}
 		},
 		jscs: {
 			options: {
 				config: '.jscsrc',
-				reporter: 'inline'
+				reporter: require('jscs-stylish').path
 			},
 			src: [
 				'Gruntfile.js',
