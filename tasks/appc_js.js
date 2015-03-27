@@ -19,7 +19,40 @@ module.exports = function (grunt) {
 		// there is likely a better way to specify the path to the files
 		var optionsJscs = {
 			src: this.data,
-			options: this.options({config: 'node_modules/grunt-appc-js/.jscsrc', reporter: require('jscs-stylish').path })
+			options: this.options({
+				reporter: require('jscs-stylish').path,
+				browser: true,
+				camelcase: false,
+				curly: true,
+				eqeqeq: true,
+				eqnull: true,
+				expr: true,
+				immed: true,
+				indent: 4,
+				latedef: false,
+				newcap: true,
+				noarg: true,
+				nonew: true,
+				undef: true,
+				unused: false,
+				trailing: true,
+				loopfunc: true,
+				proto: true,
+				node: true,
+				'-W104': true,
+				'-W068': true,
+				globals: {
+					after      : false,
+					afterEach  : false,
+					before     : false,
+					beforeEach : false,
+					describe   : false,
+					it         : false,
+					should     : false,
+					Titanium   : false,
+					Ti         : false
+				}				
+			})
 		};
 
 		var optionsJsHint = {
