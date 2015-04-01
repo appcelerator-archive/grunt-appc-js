@@ -25,10 +25,10 @@ module.exports = function (grunt) {
 		// there is likely a better way to specify the path to the files
 		var optionsJscs = {
 			src: source,
-			options: this.options({
+			options: _.omit(this.options({
 				config: 'node_modules/grunt-appc-js/.jscsrc', 
 				reporter: require('jscs-stylish').path,
-			})
+			}), "globals")
 		};
 
 		var jsHintConfig = {
@@ -64,13 +64,11 @@ module.exports = function (grunt) {
 			}
 		};
 
-		var opts = _.merge(this.options(),
-				{reporter: path.join(packpath.self(), 'node_modules/jshint-stylish/stylish.js')},
-				jsHintConfig);
-
 		var optionsJsHint = {
 			src: source,
-			options: _.omit(opts, "fix")
+			options: _.omit(_.merge(this.options(),
+				{reporter: path.join(packpath.self(), 'node_modules/jshint-stylish/stylish.js')},
+				jsHintConfig), "fix")
 		};
 
 		// have to require the specific task, as there is no "main" in package.json

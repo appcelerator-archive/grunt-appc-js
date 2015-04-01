@@ -32,7 +32,10 @@ grunt.initConfig({
 	appcJs: {
 		options: {
 			force: false,
-			fix: false
+			fix: false,
+			globals: {
+				"$config": true
+			}			
 		}
 	src: ['paths', 'to', 'js', 'files'],
 	}
@@ -41,6 +44,7 @@ grunt.initConfig({
 
 * force (optional): If set to true, don't fail the task on errors
 * fix (optional): If set to true, fix the style errors as reported by JSCS (to the best of its ability)
+* globals (optional): A list of globally-defined variables to ignore
 
 ### Mutliple targets
 
