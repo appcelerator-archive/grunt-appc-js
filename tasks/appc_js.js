@@ -11,6 +11,7 @@
 var extendGruntPlugin = require('extend-grunt-plugin');
 var packpath = require('packpath');
 var path = require('path');
+var _ = require('lodash');
 
 module.exports = function (grunt) {
 
@@ -20,44 +21,49 @@ module.exports = function (grunt) {
 		var optionsJscs = {
 			src: this.data,
 			options: this.options({
+				config: 'node_modules/grunt-appc-js/.jscsrc', 
 				reporter: require('jscs-stylish').path,
-				browser: true,
-				camelcase: false,
-				curly: true,
-				eqeqeq: true,
-				eqnull: true,
-				expr: true,
-				immed: true,
-				indent: 4,
-				latedef: false,
-				newcap: true,
-				noarg: true,
-				nonew: true,
-				undef: true,
-				unused: false,
-				trailing: true,
-				loopfunc: true,
-				proto: true,
-				node: true,
-				'-W104': true,
-				'-W068': true,
-				globals: {
-					after      : false,
-					afterEach  : false,
-					before     : false,
-					beforeEach : false,
-					describe   : false,
-					it         : false,
-					should     : false,
-					Titanium   : false,
-					Ti         : false
-				}				
 			})
+		};
+
+		var jsHintConfig = {
+			browser: true,
+			camelcase: false,
+			curly: true,
+			eqeqeq: true,
+			eqnull: true,
+			expr: true,
+			immed: true,
+			indent: 4,
+			latedef: false,
+			newcap: true,
+			noarg: true,
+			nonew: true,
+			undef: true,
+			unused: false,
+			trailing: true,
+			loopfunc: true,
+			proto: true,
+			node: true,
+			'-W104': true,
+			'-W068': true,
+			globals: {
+				after      : false,
+				afterEach  : false,
+				before     : false,
+				beforeEach : false,
+				describe   : false,
+				it         : false,
+				Titanium   : false,
+				Ti         : false
+			}
 		};
 
 		var optionsJsHint = {
 			src: this.data,
-			options: this.options({jshintrc: 'node_modules/grunt-appc-js/.jshintrc', reporter: path.join(packpath.self(), 'node_modules/jshint-stylish/stylish.js')})
+			options: _.merge(this.options(),
+				{reporter: path.join(packpath.self(), 'node_modules/jshint-stylish/stylish.js')},
+				jsHintConfig)
 		};
 
 		// have to require the specific task, as there is no "main" in package.json
