@@ -87,7 +87,7 @@ module.exports = function (grunt) {
 		});
 
 		// Runs the subtasks
-		grunt.task.run('jshint:src'); //, 'jscs:src');
+		grunt.task.run('jshint:src', 'jscs:src');
 
 	});
 
