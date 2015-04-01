@@ -17,9 +17,14 @@ module.exports = function (grunt) {
 
 	grunt.registerMultiTask('appcJs', 'Linting and style checks for Appcelerator JavaScript', function () {
 
+		var source = this.data;
+		if (this.data.src) {
+			source = this.data.src;
+		}
+
 		// there is likely a better way to specify the path to the files
 		var optionsJscs = {
-			src: this.data,
+			src: source,
 			options: this.options({
 				config: 'node_modules/grunt-appc-js/.jscsrc', 
 				reporter: require('jscs-stylish').path,
@@ -59,11 +64,13 @@ module.exports = function (grunt) {
 			}
 		};
 
-		var optionsJsHint = {
-			src: this.data,
-			options: _.merge(this.options(),
+		var opts = _.merge(this.options(),
 				{reporter: path.join(packpath.self(), 'node_modules/jshint-stylish/stylish.js')},
-				jsHintConfig)
+				jsHintConfig);
+
+		var optionsJsHint = {
+			src: source,
+			options: _.omit(opts, "fix")
 		};
 
 		// have to require the specific task, as there is no "main" in package.json
@@ -80,7 +87,7 @@ module.exports = function (grunt) {
 		});
 
 		// Runs the subtasks
-		grunt.task.run('jshint:src', 'jscs:src');
+		grunt.task.run('jshint:src'); //, 'jscs:src');
 
 	});
 
