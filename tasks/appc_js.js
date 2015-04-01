@@ -33,7 +33,6 @@ module.exports = function (grunt) {
 
 		var jsHintConfig = {
 			browser: true,
-			camelcase: false,
 			curly: true,
 			eqeqeq: true,
 			eqnull: true,
