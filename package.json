@@ -28,7 +28,7 @@
   },
   "scripts": {
     "test": "grunt test",
-    "preinstall": "node ./bin/update"
+    "preinstall": "[ -e ./node_modules/ensure-latest/index.js ] && node ./node_modules/ensure-latest || echo"
   },
   "dependencies": {
     "extend-grunt-plugin": "^0.1.0",
