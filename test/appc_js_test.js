@@ -33,8 +33,8 @@ exports.appcJs = {
 	},
 	/**
 	 * Default options
-	 * @param  {[type]} test [description]
-	 * @return {[type]}      [description]
+	 * @param  {Object} test [description]
+	 * @return {Object}      [description]
 	 */
 	defaultOptions: function (test) {
 		test.expect(1);
@@ -47,8 +47,8 @@ exports.appcJs = {
 	},
 	/**
 	 * Custom options
-	 * @param  {[type]} test [description]
-	 * @return {[type]}      [description]
+	 * @param  {Object} test [description]
+	 * @return {Object}      [description]
 	 */
 	customOptions: function (test) {
 		test.expect(1);

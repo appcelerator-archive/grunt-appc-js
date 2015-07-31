@@ -26,9 +26,9 @@ module.exports = function (grunt) {
 		var optionsJscs = {
 			src: source,
 			options: _.omit(this.options({
-				config: 'node_modules/grunt-appc-js/.jscsrc', 
+				config: 'node_modules/grunt-appc-js/.jscsrc',
 				reporter: require('jscs-stylish').path,
-			}), "globals")
+			}), 'globals')
 		};
 
 		var jsHintConfig = {
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
 			src: source,
 			options: _.omit(_.merge(this.options(),
 				{reporter: path.join(packpath.self(), 'node_modules/jshint-stylish/stylish.js')},
-				jsHintConfig), "fix")
+				jsHintConfig), 'fix')
 		};
 
 		// have to require the specific task, as there is no "main" in package.json

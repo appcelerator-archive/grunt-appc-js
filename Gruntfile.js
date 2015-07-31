@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 			],
 			options: {
 				jshintrc: '.jshintrc',
-				reporter: 'node_modules/jshint-stylish/stylish.js'
+				reporter: 'node_modules/jshint-stylish/index.js'
 			}
 		},
 		jscs: {
@@ -59,8 +59,8 @@ module.exports = function (grunt) {
 	grunt.loadTasks('tasks');
 
 	// These plugins provide necessary tasks.
-    require( "load-grunt-tasks" )( grunt );
-    require( "time-grunt" )( grunt );
+	require('load-grunt-tasks')(grunt);
+	require('time-grunt')(grunt);
 
 	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
 	// plugin's task(s), then test the result.
