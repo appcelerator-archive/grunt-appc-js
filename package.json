@@ -1,7 +1,7 @@
 {
   "name": "grunt-appc-js",
   "description": "Linting and style checks for Appcelerator JavaScript",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "homepage": "https://github.com/ingo/grunt-appc-js",
   "license": "Apache-2.0",
   "author": {
@@ -9,7 +9,7 @@
     "email": "ingo@muschenetz.com"
   },
   "keywords": [
-    "appc-client"
+    "gruntplugin"
   ],
   "repository": {
     "type": "git",
@@ -38,7 +38,7 @@
     "jscs-jsdoc": "^1.1.0",
     "jscs-stylish": "^0.3.1",
     "jshint-stylish": "^2.0.1",
-    "lodash": "^3.10.0"    
+    "lodash": "^3.10.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -51,8 +51,5 @@
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
-  },
-  "keywords": [
-    "gruntplugin"
-  ]
+  }
 }
