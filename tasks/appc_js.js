@@ -66,7 +66,7 @@ module.exports = function (grunt) {
 		var optionsJsHint = {
 			src: source,
 			options: _.omit(_.merge(this.options(),
-				{reporter: path.join(packpath.self(), 'node_modules/jshint-stylish/index.js')},
+				{reporter: require('jshint-stylish')},
 				jsHintConfig), 'fix')
 		};
 

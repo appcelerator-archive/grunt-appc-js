@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 			],
 			options: {
 				jshintrc: '.jshintrc',
-				reporter: 'node_modules/jshint-stylish/index.js'
+				reporter: require('jshint-stylish')
 			}
 		},
 		jscs: {
