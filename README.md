@@ -2,9 +2,9 @@
 
 > Linting and style checks for Appcelerator JavaScript
 
-[![Build Status](https://travis-ci.org/ingo/grunt-appc-js.svg?branch=master)](https://travis-ci.org/ingo/grunt-appc-js)
-[![Dependency Status](https://david-dm.org/ingo/grunt-appc-js.svg)](https://david-dm.org/ingo/grunt-appc-js)
-[![devDependency Status](https://david-dm.org/ingo/grunt-appc-js/dev-status.svg)](https://david-dm.org/ingo/grunt-appc-js#info=devDependencies)
+[![Build Status](https://travis-ci.org/appcelerator-modules/grunt-appc-js.svg?branch=master)](https://travis-ci.org/appcelerator-modules/grunt-appc-js)
+[![Dependency Status](https://david-dm.org/appcelerator-modules/grunt-appc-js.svg)](https://david-dm.org/ingo/grunt-appc-js)
+[![devDependency Status](https://david-dm.org/appcelerator-modules/grunt-appc-js/dev-status.svg)](https://david-dm.org/appcelerator-modules/grunt-appc-js#info=devDependencies)
 [![NPM version](https://badge.fury.io/js/grunt-appc-js.svg)](http://badge.fury.io/js/grunt-appc-js)
 
 ## Getting Started
