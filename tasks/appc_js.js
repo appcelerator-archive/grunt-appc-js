@@ -33,7 +33,10 @@ module.exports = function (grunt) {
 
 		var optionsRetire = {
 			js: source,
-			node: ['.']
+			node: ['.'],
+			options: {
+				packageOnly: false
+			}
 		};
 
 		var jsHintConfig = {
@@ -94,7 +97,7 @@ module.exports = function (grunt) {
 		});
 
 		// Runs the subtasks
-		grunt.task.run('jshint:src', 'jscs:src');
+		grunt.task.run('jshint:src', 'jscs:src', 'retire:js');
 
 	});
 
