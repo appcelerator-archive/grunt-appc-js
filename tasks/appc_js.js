@@ -31,6 +31,11 @@ module.exports = function (grunt) {
 			}), 'globals')
 		};
 
+		var optionsRetire = {
+			js: source,
+			node: ['.']
+		};
+
 		var jsHintConfig = {
 			browser: true,
 			curly: true,
@@ -73,6 +78,7 @@ module.exports = function (grunt) {
 		// have to require the specific task, as there is no "main" in package.json
 		var jscs = require('grunt-jscs/tasks/jscs');
 		var jshint = require('grunt-contrib-jshint/tasks/jshint');
+		var retire = require('grunt-retire/tasks/retire');
 
 		// Creates a target on grunt, that can be run later
 		extendGruntPlugin(grunt, jscs, {
@@ -81,6 +87,10 @@ module.exports = function (grunt) {
 
 		extendGruntPlugin(grunt, jshint, {
 			'jshint.src' : optionsJsHint
+		});
+
+		extendGruntPlugin(grunt, retire, {
+			'retire.js' : optionsRetire
 		});
 
 		// Runs the subtasks

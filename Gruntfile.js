@@ -10,14 +10,12 @@
 
 module.exports = function (grunt) {
 
+	var source = ['Gruntfile.js', 'tasks/*.js', '<%= nodeunit.tests %>'];
+
 	// Project configuration.
 	grunt.initConfig({
 		jshint: {
-			all: [
-				'Gruntfile.js',
-				'tasks/*.js',
-				'<%= nodeunit.tests %>'
-			],
+			all: source,
 			options: {
 				jshintrc: '.jshintrc',
 				reporter: require('jshint-stylish')
@@ -28,11 +26,14 @@ module.exports = function (grunt) {
 				config: '.jscsrc',
 				reporter: require('jscs-stylish').path
 			},
-			src: [
-				'Gruntfile.js',
-				'tasks/*.js',
-				'<%= nodeunit.tests %>'
-			]
+			src: source
+		},
+		retire: {
+			js: source,
+			node: ['.'],
+			options : {
+				packageOnly: false
+			}
 		},
 
 		// Before generating any new files, remove any previously-created files.
@@ -67,6 +68,6 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', ['clean', 'nodeunit']);
 
 	// By default, lint and run all tests.
-	grunt.registerTask('default', ['jshint', 'jscs', 'test']);
+	grunt.registerTask('default', ['jshint', 'jscs', 'retire', 'test']);
 
 };
