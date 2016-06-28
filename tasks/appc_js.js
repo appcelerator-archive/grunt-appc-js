@@ -92,12 +92,13 @@ module.exports = function (grunt) {
 			'jshint.src' : optionsJsHint
 		});
 
-		extendGruntPlugin(grunt, retire, {
-			'retire.js' : optionsRetire
-		});
+		// The way the retire plugin works is not compatible with extendGruntPlugin
+		// so we simply add the config manually here.
+		retire(grunt);
+		grunt.config.set('retire', optionsRetire);
 
 		// Runs the subtasks
-		grunt.task.run('jshint:src', 'jscs:src', 'retire:js');
+		grunt.task.run('jshint:src', 'jscs:src', 'retire');
 
 	});
 
