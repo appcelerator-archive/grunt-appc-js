@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "extend-grunt-plugin": "^0.1.0",
+    "grunt-continue": "^0.1.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-jscs": "^2.8.0",
     "grunt-retire": "~0.3.12",
