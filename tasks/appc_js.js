@@ -17,88 +17,126 @@ module.exports = function (grunt) {
 
 	grunt.registerMultiTask('appcJs', 'Linting and style checks for Appcelerator JavaScript', function () {
 
+		var that = this;
 		var source = this.data;
 		if (this.data.src) {
 			source = this.data.src;
 		}
 
-		// there is likely a better way to specify the path to the files
-		var optionsJscs = {
-			src: source,
-			options: _.omit(this.options({
-				config: 'node_modules/grunt-appc-js/.jscsrc',
-				reporter: require('jscs-stylish').path,
-			}), 'globals')
-		};
+		initializeJscsPlugin();
+		initializeJshintPlugin();
+		initializeContinuePlugin();
+		initializeRetirePlugin();
 
-		var optionsRetire = {
-			js: source,
-			node: ['.'],
-			options: {
-				packageOnly: false
-			}
-		};
+		grunt.task.run('jshint:src', 'jscs:src', 'continue:on', 'retire', 'continue:off');
 
-		var jsHintConfig = {
-			browser: true,
-			curly: true,
-			eqeqeq: true,
-			eqnull: true,
-			expr: true,
-			immed: true,
-			indent: 4,
-			latedef: false,
-			newcap: true,
-			noarg: true,
-			nonew: true,
-			undef: true,
-			unused: false,
-			trailing: true,
-			loopfunc: true,
-			proto: true,
-			node: true,
-			'-W104': true,
-			'-W068': true,
-			globals: {
-				after      : false,
-				afterEach  : false,
-				before     : false,
-				beforeEach : false,
-				describe   : false,
-				it         : false,
-				Titanium   : false,
-				Ti         : false
-			}
-		};
+		/**
+		 * Initializes the jscs plugin
+		 *
+		 * @return {void}
+		 */
+		function initializeJscsPlugin() {
+			// there is likely a better way to specify the path to the files
+			var optionsJscs = {
+				src: source,
+				options: _.omit(that.options({
+					config: 'node_modules/grunt-appc-js/.jscsrc',
+					reporter: require('jscs-stylish').path,
+				}), 'globals')
+			};
 
-		var optionsJsHint = {
-			src: source,
-			options: _.omit(_.merge(this.options(),
-				{reporter: require('jshint-stylish')},
-				jsHintConfig), 'fix')
-		};
+			var jscs = require('grunt-jscs/tasks/jscs');
+			extendGruntPlugin(grunt, jscs, {
+				'jscs.src' : optionsJscs
+			});
+		}
 
-		// have to require the specific task, as there is no "main" in package.json
-		var jscs = require('grunt-jscs/tasks/jscs');
-		var jshint = require('grunt-contrib-jshint/tasks/jshint');
-		var retire = require('grunt-retire/tasks/retire');
+		/**
+		 * Initializes the jshint plugin
+		 *
+		 * @return {void}
+		 */
+		function initializeJshintPlugin() {
+			var jsHintConfig = {
+				browser: true,
+				curly: true,
+				eqeqeq: true,
+				eqnull: true,
+				expr: true,
+				immed: true,
+				indent: 4,
+				latedef: false,
+				newcap: true,
+				noarg: true,
+				nonew: true,
+				undef: true,
+				unused: false,
+				trailing: true,
+				loopfunc: true,
+				proto: true,
+				node: true,
+				'-W104': true,
+				'-W068': true,
+				globals: {
+					after      : false,
+					afterEach  : false,
+					before     : false,
+					beforeEach : false,
+					describe   : false,
+					it         : false,
+					Titanium   : false,
+					Ti         : false
+				}
+			};
 
-		// Creates a target on grunt, that can be run later
-		extendGruntPlugin(grunt, jscs, {
-			'jscs.src' : optionsJscs
-		});
+			var optionsJsHint = {
+				src: source,
+				options: _.omit(_.merge(that.options(),
+					{reporter: require('jshint-stylish')},
+					jsHintConfig), 'fix')
+			};
 
-		extendGruntPlugin(grunt, jshint, {
-			'jshint.src' : optionsJsHint
-		});
+			var jshint = require('grunt-contrib-jshint/tasks/jshint');
+			extendGruntPlugin(grunt, jshint, {
+				'jshint.src' : optionsJsHint
+			});
+		}
 
-		extendGruntPlugin(grunt, retire, {
-			'retire.js' : optionsRetire
-		});
+		/**
+		 * Initializes the retire.js plugin
+		 *
+		 * The way the retire plugin works is not compatible with extendGruntPlugin
+		 * so we simply add the config manually.
+		 *
+		 * @return {void}
+		 */
+		function initializeRetirePlugin() {
+			var optionsRetire = {
+				js: source,
+				node: ['.'],
+				options: {
+					packageOnly: false
+				}
+			};
 
-		// Runs the subtasks
-		grunt.task.run('jshint:src', 'jscs:src', 'retire:js');
+			var retire = require('grunt-retire/tasks/retire');
+			retire(grunt);
+			grunt.config.set('retire', optionsRetire);
+		}
 
+		/**
+		 * Initializes the continue plugin
+		 *
+		 * This plugin allows us to temporarily set the --force flag so retire.js
+		 * wont't fail our build. Should be removed after a certain transition
+		 * period.
+		 *
+		 * @return {void}
+		 */
+		function initializeContinuePlugin() {
+			var gruntContinue = require('grunt-continue/tasks/continue');
+			gruntContinue(grunt);
+		}
 	});
 
 };
