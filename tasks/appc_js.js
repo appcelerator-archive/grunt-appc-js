@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 			var optionsJscs = {
 				src: source,
 				options: _.omit(that.options({
-					config: 'node_modules/grunt-appc-js/.jscsrc',
+					config: path.join(__dirname, '..', '.jscsrc'),
 					reporter: require('jscs-stylish').path,
 				}), 'globals')
 			};
