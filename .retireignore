@@ -1,1 +1,2 @@
-@uglify-js
+@grunt-retire
+node_modules/grunt-retire
