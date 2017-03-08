@@ -15,8 +15,7 @@ var _ = require('lodash');
 
 module.exports = function (grunt) {
 
-	grunt.registerMultiTask('appcJs', 'Linting and style checks for Appcelerator JavaScript', function () {
-
+	grunt.registerMultiTask('appcJs', 'Linting and style checks for Appcelerator JavaScript', function (lintOnly) {
 		var that = this;
 		var source = this.data;
 		if (this.data.src) {
@@ -25,10 +24,16 @@ module.exports = function (grunt) {
 
 		initializeJscsPlugin();
 		initializeJshintPlugin();
-		initializeContinuePlugin();
-		initializeRetirePlugin();
+		if(lintOnly) {
+			grunt.task.run('jshint:src', 'jscs:src');
+		} else {
+			initializeContinuePlugin();
+			initializeRetirePlugin();
+			grunt.task.run('jshint:src', 'jscs:src', 'continue:on', 'retire', 'continue:off');
 
-		grunt.task.run('jshint:src', 'jscs:src', 'continue:on', 'retire', 'continue:off');
+		}
+
+
 
 		/**
 		 * Initializes the jscs plugin
