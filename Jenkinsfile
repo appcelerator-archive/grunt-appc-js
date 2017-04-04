@@ -1,9 +1,4 @@
-library 'pipeline-library'
-
-@NonCPS
-def jsonParse(def json) {
-	new groovy.json.JsonSlurperClassic().parseText(json)
-}
+library 'pipeline-library@additions'
 
 @NonCPS
 def parseOriginURL(def url) {
