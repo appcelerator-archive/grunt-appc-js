@@ -1,4 +1,4 @@
-library 'pipeline-library@additions'
+library 'pipeline-library'
 
 timestamps {
 	node('(osx || linux) && git') {
@@ -10,7 +10,7 @@ timestamps {
 			checkout scm
 
 			isPR = env.BRANCH_NAME.startsWith('PR-')
-			// tagGit = !isPR
+			tagGit = !isPR
 
 			def packageJSON = jsonParse(readFile('package.json'))
 			packageVersion = packageJSON['version']
