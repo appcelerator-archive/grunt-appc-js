@@ -9,6 +9,7 @@
 'use strict';
 
 var extendGruntPlugin = require('extend-grunt-plugin');
+var fs = require('fs');
 var packpath = require('packpath');
 var path = require('path');
 var _ = require('lodash');
@@ -24,16 +25,14 @@ module.exports = function (grunt) {
 
 		initializeJscsPlugin();
 		initializeJshintPlugin();
-		if(lintOnly) {
+		if (lintOnly) {
 			grunt.task.run('jshint:src', 'jscs:src');
 		} else {
 			initializeContinuePlugin();
 			initializeRetirePlugin();
-			grunt.task.run('jshint:src', 'jscs:src', 'continue:on', 'retire', 'continue:off');
-
+			initializeNSPPlugin();
+			grunt.task.run('jshint:src', 'jscs:src', 'continue:on', 'retire', 'nsp', 'continue:off');
 		}
-
-
 
 		/**
 		 * Initializes the jscs plugin
@@ -127,6 +126,26 @@ module.exports = function (grunt) {
 			var retire = require('grunt-retire/tasks/retire');
 			retire(grunt);
 			grunt.config.set('retire', optionsRetire);
+		}
+
+		/**
+		 * Initializes the NSP plugin
+		 * @return {void}
+		 */
+		function initializeNSPPlugin() {
+			var pkg = path.join(process.cwd(), 'package');
+			var nsp = require('grunt-nsp/tasks/nsp');
+			if (fs.existsSync(pkg)) {
+				extendGruntPlugin(grunt, nsp, {
+					'nsp.package' : pkg,
+					'nsp.output' : 'summary'
+				});
+			} else {
+				grunt.log.error('Could not find package.json at ' + pkg + ' skipping nsp check');
+				extendGruntPlugin(grunt, nsp, {
+					'nsp.output' : 'none'
+				});
+			}
 		}
 
 		/**
