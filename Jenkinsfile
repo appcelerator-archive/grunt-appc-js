@@ -1,16 +1,18 @@
 library 'pipeline-library'
 
 timestamps {
-	node('(osx || linux) && git') {
+	node('(osx || linux) && git && npm-publish') {
 		def packageVersion = ''
 		def isPR = false
 		def tagGit = true
+		def publish = true
 
 		stage('Checkout') {
 			checkout scm
 
 			isPR = env.BRANCH_NAME.startsWith('PR-')
 			tagGit = !isPR
+			publish = !isPR
 
 			def packageJSON = jsonParse(readFile('package.json'))
 			packageVersion = packageJSON['version']
@@ -49,6 +51,9 @@ timestamps {
 						// FIXME Include changes in the tag message?
 						pushGitTag(force: true, name: packageVersion, message: "See ${env.BUILD_URL} for more information.")
 					} // tagGit
+					if (publish) {
+						sh 'npm publish'
+					}
 				} // stage
 			} // ansiColor
 		} // nodejs
