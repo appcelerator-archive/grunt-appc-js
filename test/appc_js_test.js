@@ -1,62 +1,17 @@
-'use strict';
+var grunt = require('grunt'),
+	should = require('should'); // eslint-disable-line no-unused-vars
 
-var grunt = require('grunt');
+describe('grunt-appc-js', function () {
 
-/*
-	======== A Handy Little Nodeunit Reference ========
-	https://github.com/caolan/nodeunit
-
-	Test methods:
-		test.expect(numAssertions)
-		test.done()
-	Test assertions:
-		test.ok(value, [message])
-		test.equal(actual, expected, [message])
-		test.notEqual(actual, expected, [message])
-		test.deepEqual(actual, expected, [message])
-		test.notDeepEqual(actual, expected, [message])
-		test.strictEqual(actual, expected, [message])
-		test.notStrictEqual(actual, expected, [message])
-		test.throws(block, [error], [message])
-		test.doesNotThrow(block, [error], [message])
-		test.ifError(value)
-*/
-
-exports.appcJs = {
-	/**
-	 * Setup
-	 * @param {Function} done [description]
-	 */
-	setUp: function (done) {
-		// setup here if necessary
-		done();
-	},
-	/**
-	 * Default options
-	 * @param  {Object} test [description]
-	 * @return {Object}      [description]
-	 */
-	defaultOptions: function (test) {
-		test.expect(1);
-
+	it('should handle default options', function () {
 		var actual = grunt.file.read('test/expected/default_options');
 		var expected = grunt.file.read('test/expected/default_options');
-		test.equal(actual, expected, 'should describe what the default behavior is.');
+		actual.should.equal(expected, 'should describe what the default behavior is.');
+	});
 
-		test.done();
-	},
-	/**
-	 * Custom options
-	 * @param  {Object} test [description]
-	 * @return {Object}      [description]
-	 */
-	customOptions: function (test) {
-		test.expect(1);
-
+	it('should handle custom options', function () {
 		var actual = grunt.file.read('test/expected/custom_options');
 		var expected = grunt.file.read('test/expected/custom_options');
-		test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
-		test.done();
-	},
-};
+		actual.should.equal(expected, 'should describe what the custom option(s) behavior is.');
+	});
+});

@@ -2,7 +2,7 @@
  * grunt-appc-js
  * https://github.com/ingo/grunt-appc-js
  *
- * Copyright (c) 2015 Ingo Muschenetz
+ * Copyright (c) 2015-2017 Ingo Muschenetz
  * Licensed under the MIT license.
  */
 
@@ -10,46 +10,44 @@
 
 module.exports = function (grunt) {
 
-	var source = ['Gruntfile.js', 'tasks/*.js', '<%= nodeunit.tests %>'];
+	var source = [ 'Gruntfile.js', 'tasks/*.js', '<%= mocha_istanbul.coverage.src %>' ];
 
 	// Project configuration.
 	grunt.initConfig({
-		jshint: {
-			all: source,
-			options: {
-				jshintrc: '.jshintrc',
-				reporter: require('jshint-stylish')
-			}
-		},
-		jscs: {
-			options: {
-				config: '.jscsrc',
-				reporter: require('jscs-stylish').path
-			},
-			src: source
+		eslint: {
+			target: source
 		},
 		retire: {
 			js: source,
-			node: ['.'],
+			node: [ '.' ],
 			options : {
-				packageOnly: false
+				packageOnly: false,
+				outputFile: 'retirejs.output.json'
 			}
 		},
 
 		// Before generating any new files, remove any previously-created files.
 		clean: {
-			tests: ['tmp']
+			tests: [ 'tmp', 'coverage' ]
 		},
 
 		// Unit tests.
-		nodeunit: {
-			tests: ['test/*_test.js']
+		mocha_istanbul: {
+			coverage: {
+				src: [ 'test/*_test.js' ],
+				options: {
+					timeout: 3500,
+					reporter: 'mocha-jenkins-reporter',
+					reportFormats: [ 'lcov', 'cobertura' ],
+					ignoreLeaks: false
+				}
+			}
 		},
 
 		bump: {
 			options: {
-				files: ['package.json'],
-				commitFiles: ['package.json'],
+				files: [ 'package.json' ],
+				commitFiles: [  'package.json' ],
 				pushTo: 'origin'
 			}
 		}
@@ -65,9 +63,11 @@ module.exports = function (grunt) {
 
 	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
 	// plugin's task(s), then test the result.
-	grunt.registerTask('test', ['clean', 'nodeunit']);
+	grunt.registerTask('test', [ 'clean', 'mocha_istanbul' ]);
+
+	grunt.registerTask('lint', [ 'eslint' ]);
 
 	// By default, lint and run all tests.
-	grunt.registerTask('default', ['jshint', 'jscs', 'retire', 'test']);
+	grunt.registerTask('default', [ 'lint', 'retire', 'test' ]);
 
 };
