@@ -10,6 +10,8 @@
 
 var extendGruntPlugin = require('extend-grunt-plugin');
 var path = require('path');
+var fs = require('fs');
+var ourEslintRc = path.join(__dirname, '..', '.eslintrc');
 
 module.exports = function (grunt) {
 
@@ -35,15 +37,21 @@ module.exports = function (grunt) {
 		 * @return {void}
 		 */
 		function initializeEslintPlugin() {
-			// there is likely a better way to specify the path to the files
-			var optionsEslint = {
-				src: source,
-				options: that.options({
-					config: path.join(__dirname, '..', '.eslintrc')
-				})
-			};
+			var theirEslintRc = '.eslintrc',
+				optionsEslint = {
+					src: source,
+					options: {}
+				},
+				eslint = require('grunt-eslint/tasks/eslint'),
+				config = theirEslintRc; // there is likely a better way to specify the path to the files
+			if (!fs.existsSync(theirEslintRc)) {
+				// Try to use a .eslintrc in root of target project, if that doesn't exist, use the one in this project!
+				config = ourEslintRc;
+			}
+			optionsEslint.options = that.options({
+				configFile: config
+			});
 
-			var eslint = require('grunt-eslint/tasks/eslint');
 			extendGruntPlugin(grunt, eslint, {
 				'eslint.src' : optionsEslint
 			});
