@@ -1,8 +1,8 @@
 {
   "name": "grunt-appc-js",
   "description": "Linting and style checks for Appcelerator JavaScript",
-  "version": "1.0.26",
-  "homepage": "https://github.com/ingo/grunt-appc-js",
+  "version": "2.0.0",
+  "homepage": "https://github.com/appcelerator/grunt-appc-js",
   "license": "Apache-2.0",
   "author": {
     "name": "Ingo Muschenetz",
@@ -13,42 +13,41 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ingo/grunt-appc-js.git"
+    "url": "git://github.com/appcelerator/grunt-appc-js.git"
   },
   "bugs": {
-    "url": "https://github.com/ingo/grunt-appc-js/issues"
+    "url": "https://github.com/appcelerator/grunt-appc-js/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/ingo/grunt-appc-js/blob/master/LICENSE-MIT"
+      "url": "https://github.com/appcelerator/grunt-appc-js/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "JUNIT_REPORT_PATH=junit_report.xml grunt"
   },
   "dependencies": {
+    "eslint-config-axway": "^2.0.1",
+    "eslint-plugin-mocha": "^4.11.0",
     "extend-grunt-plugin": "^0.1.0",
     "grunt-continue": "^0.1.0",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-jscs": "^3.0.1",
-    "grunt-retire": "~1.0.6",
-    "jscs-jsdoc": "^2.0.0",
-    "jscs-stylish": "^0.3.1",
-    "jshint-stylish": "^2.1.0",
-    "lodash": "^4.8.2",
-    "packpath": "^0.1.0"
+    "grunt-eslint": "^20.0.0",
+    "grunt-retire": "~1.0.6"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-cli": "^1.2.0",
     "grunt-bump": "^0.8.0",
     "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-nodeunit": "^1.0.0",
+    "grunt-mocha-istanbul": "^5.0.2",
+    "istanbul": "^0.4.5",
     "load-grunt-tasks": "^3.3.0",
+    "mocha": "~1.17.1",
+    "mocha-jenkins-reporter": "^0.3.7",
+    "should": "~3.1.2",
     "time-grunt": "^1.2.2"
   },
   "peerDependencies": {

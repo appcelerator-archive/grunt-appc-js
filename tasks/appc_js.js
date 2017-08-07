@@ -2,16 +2,14 @@
  * grunt-appc-js
  * https://github.com/ingo/grunt-appc-js
  *
- * Copyright (c) 2015 Ingo Muschenetz
+ * Copyright (c) 2015-2017 Ingo Muschenetz
  * Licensed under the MIT license.
  */
 
 'use strict';
 
 var extendGruntPlugin = require('extend-grunt-plugin');
-var packpath = require('packpath');
 var path = require('path');
-var _ = require('lodash');
 
 module.exports = function (grunt) {
 
@@ -22,88 +20,32 @@ module.exports = function (grunt) {
 			source = this.data.src;
 		}
 
-		initializeJscsPlugin();
-		initializeJshintPlugin();
-		if(lintOnly) {
-			grunt.task.run('jshint:src', 'jscs:src');
+		initializeEslintPlugin();
+		if (lintOnly) {
+			grunt.task.run('eslint:src');
 		} else {
 			initializeContinuePlugin();
 			initializeRetirePlugin();
-			grunt.task.run('jshint:src', 'jscs:src', 'continue:on', 'retire', 'continue:off');
-
+			grunt.task.run('eslint:src', 'continue:on', 'retire', 'continue:off');
 		}
 
-
-
 		/**
-		 * Initializes the jscs plugin
+		 * Initializes the eslint plugin
 		 *
 		 * @return {void}
 		 */
-		function initializeJscsPlugin() {
+		function initializeEslintPlugin() {
 			// there is likely a better way to specify the path to the files
-			var optionsJscs = {
+			var optionsEslint = {
 				src: source,
-				options: _.omit(that.options({
-					config: path.join(__dirname, '..', '.jscsrc'),
-					reporter: require('jscs-stylish').path,
-				}), 'globals')
+				options: that.options({
+					config: path.join(__dirname, '..', '.eslintrc')
+				})
 			};
 
-			var jscs = require('grunt-jscs/tasks/jscs');
-			extendGruntPlugin(grunt, jscs, {
-				'jscs.src' : optionsJscs
-			});
-		}
-
-		/**
-		 * Initializes the jshint plugin
-		 *
-		 * @return {void}
-		 */
-		function initializeJshintPlugin() {
-			var jsHintConfig = {
-				browser: true,
-				curly: true,
-				eqeqeq: true,
-				eqnull: true,
-				expr: true,
-				immed: true,
-				indent: 4,
-				latedef: false,
-				newcap: true,
-				noarg: true,
-				nonew: true,
-				undef: true,
-				unused: false,
-				trailing: true,
-				loopfunc: true,
-				proto: true,
-				node: true,
-				'-W104': true,
-				'-W068': true,
-				globals: {
-					after      : false,
-					afterEach  : false,
-					before     : false,
-					beforeEach : false,
-					describe   : false,
-					it         : false,
-					Titanium   : false,
-					Ti         : false
-				}
-			};
-
-			var optionsJsHint = {
-				src: source,
-				options: _.omit(_.merge(that.options(),
-					{reporter: require('jshint-stylish')},
-					jsHintConfig), 'fix')
-			};
-
-			var jshint = require('grunt-contrib-jshint/tasks/jshint');
-			extendGruntPlugin(grunt, jshint, {
-				'jshint.src' : optionsJsHint
+			var eslint = require('grunt-eslint/tasks/eslint');
+			extendGruntPlugin(grunt, eslint, {
+				'eslint.src' : optionsEslint
 			});
 		}
 
@@ -118,10 +60,11 @@ module.exports = function (grunt) {
 		function initializeRetirePlugin() {
 			var optionsRetire = {
 				js: source,
-				node: ['.'],
-				options: {
-					packageOnly: false
-				}
+				node: [ '.' ],
+				options: that.options({
+					packageOnly: false,
+					outputFile: 'retirejs.output.json'
+				})
 			};
 
 			var retire = require('grunt-retire/tasks/retire');
