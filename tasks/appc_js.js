@@ -15,7 +15,7 @@ var ourEslintRc = path.join(__dirname, '..', '.eslintrc');
 
 module.exports = function (grunt) {
 
-	grunt.registerMultiTask('appcJs', 'Linting and style checks for Appcelerator JavaScript', function (lintOnly) {
+	grunt.registerMultiTask('appcJs', 'Linting and style checks for Appcelerator JavaScript', function (lintOnly, fix) {
 		var that = this;
 		var source = this.data;
 		if (this.data.src) {
@@ -49,7 +49,8 @@ module.exports = function (grunt) {
 				config = ourEslintRc;
 			}
 			optionsEslint.options = that.options({
-				configFile: config
+				configFile: config,
+				fix
 			});
 
 			extendGruntPlugin(grunt, eslint, {
