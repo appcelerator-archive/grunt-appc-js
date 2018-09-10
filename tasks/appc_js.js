@@ -54,7 +54,7 @@ module.exports = function (grunt) {
 			});
 
 			extendGruntPlugin(grunt, eslint, {
-				'eslint.src' : optionsEslint
+				'eslint.src': optionsEslint
 			});
 		}
 

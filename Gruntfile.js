@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 		retire: {
 			js: source,
 			node: [ '.' ],
-			options : {
+			options: {
 				packageOnly: false,
 				outputFile: 'retirejs.output.json'
 			}

@@ -25,29 +25,29 @@
     }
   ],
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">=6"
   },
   "scripts": {
     "test": "JUNIT_REPORT_PATH=junit_report.xml grunt"
   },
   "dependencies": {
-    "eslint-config-axway": "^2.0.1",
-    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-config-axway": "^4.0.0",
+    "eslint-plugin-mocha": "^5.2.0",
     "extend-grunt-plugin": "^0.1.0",
     "grunt-continue": "^0.1.0",
-    "grunt-eslint": "^20.0.0",
+    "grunt-eslint": "^21.0.0",
     "grunt-retire": "~1.0.6"
   },
   "devDependencies": {
-    "grunt": "^1.0.1",
+    "grunt": "^1.0.3",
     "grunt-bump": "^0.8.0",
-    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-clean": "^2.0.0",
     "grunt-mocha-istanbul": "^5.0.2",
     "istanbul": "^0.4.5",
-    "load-grunt-tasks": "^3.3.0",
-    "mocha": "~1.17.1",
-    "mocha-jenkins-reporter": "^0.3.7",
-    "should": "~3.1.2",
+    "load-grunt-tasks": "^4.0.0",
+    "mocha": "^5.2.0",
+    "mocha-jenkins-reporter": "^0.4.0",
+    "should": "^13.2.3",
     "time-grunt": "^1.2.2"
   },
   "peerDependencies": {
